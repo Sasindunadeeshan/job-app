@@ -25,17 +25,17 @@ const Home = () => {
                               headerShadowVisible: false,
                               headerLeft: () => (
                                     <ScreenHeaderBtn
-                                          iconUrl={icons.left}
+                                          iconUrl={icons.menu}
                                           dimension="60%"
-                                          handlePress={() => router.back()}
                                     />
                               ),
-                              headerRight: () =>(
+                              headerRight: () => (
                                     <ScreenHeaderBtn
-                                          iconUrl = {images.profile}
-                                          dimension = "100%"/>
+                                          iconUrl={images.profile}
+                                          dimension="100%"
+                                    />
                               ),
-                              headerTitle: "aaa",
+                              headerTitle: "",
                         }}
                   />
 
@@ -47,8 +47,8 @@ const Home = () => {
                               }}
                         >
                               <Welcome />
-                              <Nearbyjobs />
                               <Popularjobs />
+                              <Nearbyjobs />                             
                         </View>
                   </ScrollView>
             </SafeAreaView>
