@@ -9,7 +9,7 @@ import {
 import { Stack, useRouter, useLocalSearchParams } from "expo-router";
 import {
       Company,
-      jobAbout,
+      JobAbout,
       JobFooter,
       JobTabs,
       ScreenHeaderBtn,
@@ -30,9 +30,45 @@ const JobDetails = () => {
       });
 
       const [refreshing, setRefreshing] = useState(false);
-      const [activeTab,setActiveTab] = useState(tabs[0]);
+      const [activeTab, setActiveTab] = useState(tabs[0]);
 
       const onRefresh = () => {};
+
+      const dispalyTabContent = () => {
+            switch (activeTab) {
+                  case "About":
+                        return (
+                              <JobAbout
+                                    title="About"
+                                    info={
+                                          data[0].job_description ?? "No data Provided"
+                                    }
+                              />
+                        );
+                  case "Qualifications":
+                        return (
+                              <Specifics
+                                    title="Qualifications"
+                                    points={
+                                          data[0].job_highlights
+                                                ?.Qualifications ?? ["N/A"]
+                                    }
+                              />
+                        );
+                  case "Responsibilities":
+                        return (
+                              <Specifics
+                                    title="Responsibilities"
+                                    points={
+                                          data[0].job_highlights
+                                                ?.Responsibilities ?? ["N/A"]
+                                    }
+                              />
+                        );
+                  default:
+                  break;
+            }
+      };
 
       return (
             <SafeAreaView
@@ -93,14 +129,16 @@ const JobDetails = () => {
                                                 }
                                                 Location={data[0].job_country}
                                           />
-                                          <JobTabs 
+                                          <JobTabs
                                                 tabs={tabs}
                                                 activeTab={activeTab}
                                                 setActiveTab={setActiveTab}
                                           />
+                                          {dispalyTabContent()}
                                     </View>
                               )}
                         </ScrollView>
+                        <JobFooter url={data[0]?.job_google_link ?? 'https://careers.google.com/jobs/results'}/>
                   </>
             </SafeAreaView>
       );
